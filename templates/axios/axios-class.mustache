@@ -1,0 +1,20 @@
+{{!/**
+    Axios 接口模板
+**/}}
+'use strict';
+import axios from 'axios'
+const baseURL = '{{&path}}'
+
+/**
+*  {{&className}}Api
+*/
+
+{{#methods}}
+{{> method}}
+{{/methods}}
+
+export default{
+    {{#methods}}
+    {{&methodName}},
+    {{/methods}}
+}
