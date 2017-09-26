@@ -1,7 +1,9 @@
 pipeline {
     agent { 
-            docker 'node:latest' 
-            args  '-v /tmp:/.npm' 
+            docker{
+                image 'node:latest' 
+                args  '-v /tmp:/.npm' 
+            }
     }
     stages {
         stage('build') {
