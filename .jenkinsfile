@@ -1,10 +1,11 @@
 pipeline {
-    agent { docker 'node:latest' }
+    agent { 
+            docker 'node:latest' 
+            args  '-v /tmp:/.npm' 
+    }
     stages {
         stage('build') {
             steps {
-                sh 'users'
-                sh 'ls -l'
                 sh 'npm install'
                 sh 'npm run build'
                 sh 'npm run test'
