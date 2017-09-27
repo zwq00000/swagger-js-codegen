@@ -2,7 +2,7 @@ pipeline {
     agent { 
             docker{
                 image 'node:latest' 
-                args  '-v /tmp/.npm:/.npm' 
+                args  '-v npm_cache:/usr/local/lib/node_modules/ -u node' 
             }
     }
     stages {
