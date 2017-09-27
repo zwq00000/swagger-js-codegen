@@ -1,10 +1,11 @@
 'use strict';
 
 var _ = require('lodash');
+const fs = require('fs');
 
 const lintOptions = {
-    esnext:true
-}
+    esnext: true
+};
 
 const type = 'typescript';
 
@@ -40,11 +41,10 @@ function convertType(swaggerType, swagger) {
     } else if (swaggerType.type === 'array') {
         typespec.tsType = 'array';
         typespec.elementType = convertType(swaggerType.items);
-    } else /*if (swaggerType.type === 'object')*/ { //remaining types are created as objects
+    } else if (swaggerType.type === 'object') { //remaining types are created as objects
         if (swaggerType.minItems >= 0 && swaggerType.hasOwnProperty('title') && !swaggerType.$ref) {
             typespec.tsType = 'any';
-        }
-        else {
+        } else {
             typespec.tsType = 'object';
             typespec.properties = [];
             if (swaggerType.allOf) {
@@ -71,10 +71,10 @@ function convertType(swaggerType, swagger) {
                 typespec.properties.push(property);
             });
         }
-    } /*else {
-     // type unknown or unsupported... just map to 'any'...
-     typespec.tsType = 'any';
-     }*/
+    } else {
+        // type unknown or unsupported... just map to 'any'...
+        typespec.tsType = 'any';
+    }
 
     // Since Mustache does not provide equality checks, we need to do the case distinction via explicit booleans
     typespec.isRef = typespec.tsType === 'ref';
@@ -87,27 +87,29 @@ function convertType(swaggerType, swagger) {
 
 const preprocess = function (swagger, data) {
     console.log(`Start CodeGen preprocess ${type}`);
-    _.forEach(swagger.definitions, function (definition, name) {
+   /* _.forEach(swagger.definitions, function (definition, name) {
         data.definitions.push({
             name: name,
             description: definition.description,
             tsType: convertType(definition, swagger)
         });
     });
-    _.forEach(data.methods,function(method){
-        _.forEach(method.paramaters,function(parameter){
+    _.forEach(data.methods, function (method) {
+        _.forEach(method.paramaters, function (parameter) {
             parameter.tsType = convertType(parameter);
-        })
-    })
-}
+        });
+    });
+    */
+};
+
 const buildTemplate = function (template) {
     let templates = __dirname;
     template.class = template.class || fs.readFileSync(`${templates}/typescript-class.mustache`, 'utf-8');
     template.method = template.method || fs.readFileSync(`${templates}/typescript-method.mustache`, 'utf-8');
     template.type = template.type || fs.readFileSync(`${templates}/type.mustache`, 'utf-8');
-}
+};
 
 module.exports = {
     type, lintOptions,
     preprocess, buildTemplate
-}
+};

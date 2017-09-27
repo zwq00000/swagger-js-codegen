@@ -34,9 +34,10 @@ const processMethod = function(method){
 }
 
 /**
- * Codegen 预处理
- * @param {object} swagger 
- * @param {object} data 
+ * @method
+ * @name  Codegen 预处理
+ * @param {object} swagger  @description swagger object
+ * @param {object} data     @description Codegen object
  */
 const preprocess = function (swagger, data) {
     _.forEach(data.methods, function (method, name) {

@@ -11,7 +11,7 @@ const preprocess=function(swagger,data){
 
 const buildTemplate=function(opts){
     if (!_.isObject(opts.template) || !_.isString(opts.template.class)  || !_.isString(opts.template.method)) {
-        throw new Error('Unprovided custom template. Please use the following template: template: { class: "...", method: "...", request: "..." }');
+       // throw new Error('Unprovided custom template. Please use the following template: template: { class: "...", method: "...", request: "..." }');
     }
 }
 

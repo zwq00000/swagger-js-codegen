@@ -90,8 +90,8 @@ list.forEach(function (file) {
                 swagger: swagger,
                 lint: false
             });
-            assert(compileString('typescript generation: ' + file, result), 'typescript compilation failed');
             assert(typeof (result), 'string');
+            assert(compileString('typescript generation: ' + file, result), 'typescript compilation failed');
         }
         result = CodeGen.getCustomCode({
             moduleName: 'Test',
