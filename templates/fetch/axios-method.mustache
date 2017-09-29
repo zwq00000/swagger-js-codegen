@@ -1,5 +1,6 @@
 
 
+
 /**
 * {{&methodName}} {{&summary}}
 {{#parameters}}{{^isSingleton}}
@@ -8,18 +9,17 @@
 * @returns axios.{{#lower}}{{&method}}{{/lower}} Promission
 */
 const {{&methodName}} = function({{params}}){
-    let path = `{{&path}}`;
+    let path = '{{&path}}';
     {{#params}}
     let params = {};
-{{#parameters}}{{^isPathParameter}}
-{{#default}}
-    params['{{&name}}'] = typeof {{&camelCaseName}} !== 'undefined' ? {{&camelCaseName}}: {{&default}};
-{{/default}}
-{{^default}}
-    params['{{&name}}'] = {{&camelCaseName}};
-{{/default}}
-{{/isPathParameter}}{{/parameters}}
-
+        {{#parameters}}{{^isPathParameter}}
+        {{#default}}
+            params['{{&name}}'] = typeof {{&camelCaseName}} !== 'undefined' ? {{&camelCaseName}}: {{&default}};
+        {{/default}}
+        {{^default}}
+            params['{{&name}}'] = {{&camelCaseName}}
+        {{/default}}
+        {{/isPathParameter}}{{/parameters}}
     return fetch.{{#lower}}{{&method}}{{/lower}}(path,params);
     {{/params}}
     {{^params}}

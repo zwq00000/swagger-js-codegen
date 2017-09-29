@@ -1,6 +1,15 @@
 {
         "version": "0.2.0",
         "configurations": [
+
+            {
+                "type": "node",
+                "request": "launch",
+                "name": "Launch test via grunt",
+                "runtimeExecutable": "grunt",
+                "runtimeArgs": ["-d","${workspaceRoot}\\Gruntfile.js"],
+                "port": 5858
+            },
             {
                 "type": "node",
                 "request": "launch",
@@ -18,6 +27,26 @@
                 "request": "launch",
                 "name": "Launch test YAML",
                 "program": "${workspaceRoot}\\testyaml.js"
+            },
+            {
+                "type": "node",
+                "request": "launch",
+                "name": "Launch swagger2ts",
+                "program": "${workspaceRoot}\\bin\\swagger2ts.js",
+                "args": [
+                    "-o","./temp",
+                    "D:/Projects/PrimaN/ProIn Projects/Extensions/ProIn.WebApi/api/swagger.yaml"
+                ]
+            },
+            {
+                "type": "node",
+                "request": "launch",
+                "name": "Launch swagger2ts -l",
+                "program": "${workspaceRoot}\\bin\\swagger2ts.js",
+                "args": [
+                    "-l"
+                ]
             }
+
         ]
     }

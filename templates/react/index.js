@@ -2,25 +2,31 @@
 const fs = require('fs');
 const _ = require('lodash');
 
-const type='react'
+const type = 'react';
 
-const lintOptions={}
+const lintOptions = {};
 
-const preprocess=function(swagger,data){
+const preprocess = function (swagger, data) {
     console.log(`Start CodeGen preprocess ${type}`);
 
-}
+};
 
-const buildTemplate=function(template){
-    let templates = __dirname;
-    template.class = template.class || fs.readFileSync(`${templates}/${type}-class.mustache`, 'utf-8');
-    template.method = template.method || fs.readFileSync(`${templates}/method.mustache`, 'utf-8');
-    //if (!_.isObject(opts.template) || !_.isString(opts.template.class)  || !_.isString(opts.template.method)) {
-    //    throw new Error('Unprovided custom template. Please use the following template: template: { class: "...", method: "...", request: "..." }');
-   // }
-}
+const loadTemplates = function (opts) {
+    return {
+        class: fs.readFileSync(`${__dirname}/react-class.mustache`, 'utf-8'),
+        method: fs.readFileSync(`${__dirname}/method.mustache`, 'utf-8')
+    };
+};
+const generate = function (opts, mustache, data) {
+    let templates = loadTemplates(opts);
+    return {
+        name: opts.moduleName,
+        fileName: `${opts.moduleName}.js`,
+        source: mustache.render(templates.class, data, templates)
+    };
+};
 
 module.exports = {
-    type, lintOptions,
-    preprocess, buildTemplate
-}
+    lintOptions,
+    preprocess, loadTemplates, generate
+};

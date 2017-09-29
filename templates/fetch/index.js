@@ -4,7 +4,7 @@ const _ = require('lodash');
 const type = 'axios';
 const lintOptions = {
     node: false,
-    browser: true,
+    browser: type === 'angular' || type === 'custom' || type === 'react',
     undef: true,
     strict: true,
     trailing: true,
@@ -16,13 +16,13 @@ const processParamsType = function (parameter) {
     if (parameter.type === 'integer') {
         parameter.type = 'Number';
     }
-};
+}
 
 const processMethod = function (method) {
     let parameters = method.parameters;
     if (parameters) {
-        let params = parameters.map(p => p.name);
-        method.params = _.join(params, ',');
+        let params = parameters.map(p => p.name)
+        method.params = _.join(params, ',')
         _.forEach(parameters, processParamsType);
     }
 
@@ -31,7 +31,7 @@ const processMethod = function (method) {
     if (path && path.indexOf('{') > -1) {
         method.path = path.replace('{', '${');
     }
-};
+}
 
 const filterClasses = function (data) {
     data.classes = [];
@@ -43,7 +43,7 @@ const filterClasses = function (data) {
         classDef.methodNames = _.map(methods, 'methodName').join(',');
         data.classes.push(classDef);
     });
-};
+}
 
 /**
  * @method
@@ -56,16 +56,15 @@ const preprocess = function (swagger, data) {
         processMethod(method);
     });
     filterClasses(data);
-};
+}
 
-const loadTemplates = function () {
+const loadTemplates = function (opts) {
+    let templates = __dirname;
     return {
-        class: fs.readFileSync(`${__dirname}/axios-class.mustache`, 'utf-8'),
-        method: fs.readFileSync(`${__dirname}/axios-method.mustache`, 'utf-8'),
-        fetch: fs.readFileSync(`${__dirname}/fetch.mustache`, 'utf-8')
-    };
-};
-
+        class: fs.readFileSync(`${templates}/${type}-class.mustache`, 'utf-8'),
+        method: fs.readFileSync(`${templates}/${type}-method.mustache`, 'utf-8')
+    }
+}
 const generate = function (opts, mustache, data) {
     templates = loadTemplates();
     let results = [];
@@ -85,12 +84,7 @@ const generate = function (opts, mustache, data) {
     return results;
 };
 
-
-
-
 module.exports = {
     lintOptions,
-    preprocess,
-    loadTemplates,
-    generate
-};
+    preprocess, loadTemplates, generate
+}

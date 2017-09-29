@@ -4,11 +4,12 @@
 }}
 
 'use strict';
-import fetch from './fetch.js'
+import fetch from './fetch.json'
+axios.baseURL = '{{&path}}'
+{{#classes}}
 
 /**
 * class {{&className}} Api
-* @description {{&description}}
 */
 {{#methods}}
 {{> method}}
@@ -17,4 +18,5 @@ import fetch from './fetch.js'
 export default{ 
     {{methodNames}}
 }
+{{/classes}}
 

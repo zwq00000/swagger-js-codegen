@@ -3,21 +3,30 @@
 const fs = require('fs');
 const _ = require('lodash');
 
-const type='node';
+const type = 'node';
 
-const lintOptions={};
+const lintOptions = {};
 
-const preprocess=function(swagger,data){
+const preprocess = function (swagger, data) {
     console.log('Start preprocess for ' + type);
 };
 
-const buildTemplate=function(template){
-    let templates = __dirname;
-    template.class = template.class || fs.readFileSync(`${templates}/${type}-class.mustache`, 'utf-8');
-    template.method = template.method || fs.readFileSync(`${templates}/method.mustache`, 'utf-8');
+const loadTemplates = function (opts) {
+    return {
+        class: fs.readFileSync(`${__dirname}/node-class.mustache`, 'utf-8'),
+        method: fs.readFileSync(`${__dirname}/method.mustache`, 'utf-8')
+    }
+};
+const generate = function (opts, mustache, data) {
+    let templates = loadTemplates();
+    return {
+        name: opts.moduleName,
+        fileName: `${opts.moduleName}.js`,
+        source: mustache.render(templates.class, data, templates)
+    };
 };
 
 module.exports = {
-    type, lintOptions,
-    preprocess, buildTemplate
+    lintOptions,
+    preprocess, loadTemplates, generate
 };

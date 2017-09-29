@@ -5,5 +5,5 @@ wks.*
 .DS_Store
 *.swp
 
-tmp-*
+tmp*
 /.vs

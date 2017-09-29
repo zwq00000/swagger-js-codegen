@@ -87,29 +87,35 @@ function convertType(swaggerType, swagger) {
 
 const preprocess = function (swagger, data) {
     console.log(`Start CodeGen preprocess ${type}`);
-   /* _.forEach(swagger.definitions, function (definition, name) {
-        data.definitions.push({
-            name: name,
-            description: definition.description,
-            tsType: convertType(definition, swagger)
-        });
+    _.forEach(data.definitions, function (definition, name) {
+        definition.tsType = convertType(definition, swagger)
     });
     _.forEach(data.methods, function (method) {
         _.forEach(method.paramaters, function (parameter) {
             parameter.tsType = convertType(parameter);
         });
     });
-    */
 };
 
-const buildTemplate = function (template) {
+const loadTemplates = function (opts) {
     let templates = __dirname;
-    template.class = template.class || fs.readFileSync(`${templates}/typescript-class.mustache`, 'utf-8');
-    template.method = template.method || fs.readFileSync(`${templates}/typescript-method.mustache`, 'utf-8');
-    template.type = template.type || fs.readFileSync(`${templates}/type.mustache`, 'utf-8');
+    return {
+        class: fs.readFileSync(`${templates}/typescript-class.mustache`, 'utf-8'),
+        method: fs.readFileSync(`${templates}/typescript-method.mustache`, 'utf-8'),
+        type: fs.readFileSync(`${templates}/type.mustache`, 'utf-8')
+    }
+};
+
+const generate = function (opts, mustache, data) {
+    let templates = loadTemplates(opts);
+    return {
+        name: opts.moduleName,
+        fileName: `${opts.moduleName}.ts`,
+        source: mustache.render(templates.class, data, templates)
+    };
 };
 
 module.exports = {
-    type, lintOptions,
-    preprocess, buildTemplate
+    lintOptions,
+    preprocess, loadTemplates, generate
 };

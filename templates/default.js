@@ -20,11 +20,11 @@ const preprocess = function (swagger, data) {
  * 构建 模板内容
  * @param {object} template @description a template object
  */
-const buildTemplate = function (template) {
+const loadTemplates = function (template) {
 
 };
 
 module.exports = {
     type, lintOptions,
-    preprocess, buildTemplate
+    preprocess, loadTemplates
 };

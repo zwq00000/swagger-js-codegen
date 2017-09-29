@@ -3,19 +3,26 @@ const _ = require('lodash');
 
 const type = 'custom';
 
-const lintOptions={}
+const lintOptions = {};
 
-const preprocess=function(swagger,data){
+const preprocess = function (swagger, data) {
     console.log(`Start CodeGen preprocess ${type}`);
-}
+};
 
-const buildTemplate=function(opts){
-    if (!_.isObject(opts.template) || !_.isString(opts.template.class)  || !_.isString(opts.template.method)) {
-       // throw new Error('Unprovided custom template. Please use the following template: template: { class: "...", method: "...", request: "..." }');
-    }
-}
+const loadTemplates = function (opts) {
+    return opts.template;
+};
+
+const generate = function (opts, mustache, data) {
+    let templates = loadTemplates(opts);
+    return {
+        name: data.className,
+        fileName: `${data.className}.js`,
+        source: mustache.render(templates.class, data, templates)
+    };
+};
 
 module.exports = {
-    type, lintOptions,
-    preprocess, buildTemplate
-}
+    lintOptions,
+    preprocess, loadTemplates, generate
+};
