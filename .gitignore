@@ -7,3 +7,6 @@ wks.*
 
 tmp*
 /.vs
+
+vts.api
+genlocalhost.cmd

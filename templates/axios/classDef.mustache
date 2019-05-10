@@ -1,0 +1,15 @@
+/**
+* model define {{name}} {{title}}
+**/
+
+export default class {{name}}{
+{{#tsType}}
+{{#properties}}
+/**
+* {{description}}
+* @member {{#isRef}}{{=<% %>=}}{<%&target%>}<%={{ }}=%>{{/isRef}}{{^isRef}}{{=<% %>=}}{<%&tsType%>}<%={{ }}=%>{{/isRef}} {{name}} {{#isArray}}{{#elementType}}{{target}}{{/elementType}}{{/isArray}}
+*/
+  {{name}}{{#isArray}}=[]{{/isArray}};
+{{/properties}}
+}
+{{/tsType}}

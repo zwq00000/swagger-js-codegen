@@ -7,22 +7,27 @@
 {{/isSingleton}}{{/parameters}}
 * @returns axios.{{#lower}}{{&method}}{{/lower}} Promission
 */
-const {{&methodName}} = function({{params}}){
+const {{&methodName}} = function({{#join}}{{#parameters}}{{#default}}{{&camelCaseName}} = {{&default}},{{/default}}{{^default}}{{&camelCaseName}},{{/default}}{{/parameters}}{{/join}}){
     let path = `{{&path}}`;
-    {{#params}}
+{{#params}}
     let params = {};
 {{#parameters}}{{^isPathParameter}}
 {{#default}}
-    params['{{&name}}'] = typeof {{&camelCaseName}} !== 'undefined' ? {{&camelCaseName}}: {{&default}};
+    params['{{&camelCaseName}}'] = typeof {{&camelCaseName}} !== 'undefined' ? {{&camelCaseName}}: {{&default}};
 {{/default}}
 {{^default}}
-    params['{{&name}}'] = {{&camelCaseName}};
+    params['{{&camelCaseName}}'] = {{&camelCaseName}};
 {{/default}}
+{{#required}}
+    if(!params['{{&camelCaseName}}']){
+        throw 'required argument {{&camelCaseName}}'
+    }
+{{/required}}
 {{/isPathParameter}}{{/parameters}}
 
-    return fetch.{{#lower}}{{&method}}{{/lower}}(path,params);
+    return axios.{{#lower}}{{&method}}{{/lower}}(path,{params})
     {{/params}}
     {{^params}}
-    return fetch.{{#lower}}{{&method}}{{/lower}}(path);
+    return axios.{{#lower}}{{&method}}{{/lower}}(path)
     {{/params}}
 }

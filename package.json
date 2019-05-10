@@ -5,7 +5,8 @@
   "description": "A Swagger codegen for JavaScript",
   "scripts": {
     "test": "grunt",
-    "clean": "rm -rf tmp-*"
+    "clean": "rm -rf tmp-*",
+    "generate":"node bin/swagger2ts.js generate"
   },
   "bin": {
     "swagger2ts": "bin/swagger2ts.js"
@@ -29,26 +30,27 @@
   "license": "Apache-2.0",
   "homepage": "https://github.com/wcandillon/swagger-js-codegen",
   "dependencies": {
-    "commander": "^2.9.0",
-    "js-beautify": "^1.5.1",
-    "jshint": "^2.5.1",
-    "lodash": "^4.15.0",
-    "mustache": "^2.0.0",
-    "update-notifier": "^2.1.0",
+    "axios": "^0.18.0",
+    "commander": "^2.19.0",
+    "js-beautify": "^1.9.1",
+    "jshint": "^2.10.2",
+    "lodash": "^4.17.11",
+    "mustache": "^2.3.2",
+    "update-notifier": "^2.5.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "final-fs": "^1.6.0",
-    "grunt": "^1.0.1",
+    "grunt": "^1.0.4",
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-jsonlint": "^1.0.4",
     "grunt-vows": "^0.4.1",
     "matchdep": "^1.0.1 ",
-    "q": "^1.0.1",
-    "request": "^2.40.0",
-    "superagent": "^3.3.1",
+    "q": "^1.5.1",
+    "request": "^2.88.0",
+    "superagent": "^3.8.3",
     "tmp": "0.0.31",
-    "typescript": "^2.1.4",
-    "vows": "^0.8.1"
+    "typescript": "^2.9.2",
+    "vows": "^0.8.2"
   }
 }

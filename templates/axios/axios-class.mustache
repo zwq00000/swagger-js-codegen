@@ -2,19 +2,19 @@
     Axios 接口模板
 **/
 }}
-
-'use strict';
-import fetch from './fetch.js'
-
 /**
 * class {{&className}} Api
 * @description {{&description}}
 */
+
+import pages from '@/api/pages.js'
+import axios from 'axios'
+
 {{#methods}}
 {{> method}}
 {{/methods}}
 
 export default{ 
-    {{methodNames}}
+  {{methodNames}}
 }
 

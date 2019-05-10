@@ -1,52 +1,65 @@
 {
-        "version": "0.2.0",
-        "configurations": [
-
-            {
-                "type": "node",
-                "request": "launch",
-                "name": "Launch test via grunt",
-                "runtimeExecutable": "grunt",
-                "runtimeArgs": ["-d","${workspaceRoot}\\Gruntfile.js"],
-                "port": 5858
-            },
-            {
-                "type": "node",
-                "request": "launch",
-                "name": "Launch test.js",
-                "program": "${workspaceRoot}/test.js"
-            },
-            {
-                "type": "node",
-                "request": "launch",
-                "name": "Launch testmustache",
-                "program": "${workspaceRoot}\\testmustache.js"
-            },
-            {
-                "type": "node",
-                "request": "launch",
-                "name": "Launch test YAML",
-                "program": "${workspaceRoot}\\testyaml.js"
-            },
-            {
-                "type": "node",
-                "request": "launch",
-                "name": "Launch swagger2ts",
-                "program": "${workspaceRoot}\\bin\\swagger2ts.js",
-                "args": [
-                    "-o","./temp",
-                    "D:/Projects/PrimaN/ProIn Projects/Extensions/ProIn.WebApi/api/swagger.yaml"
-                ]
-            },
-            {
-                "type": "node",
-                "request": "launch",
-                "name": "Launch swagger2ts -l",
-                "program": "${workspaceRoot}\\bin\\swagger2ts.js",
-                "args": [
-                    "-l"
-                ]
-            }
-
-        ]
-    }
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch cli",
+            "program": "${workspaceFolder}/lib/cli.js",
+            "args": [
+                "http://192.168.1.103:5000/swagger.json",
+                "-t",
+                "axios"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch test via grunt",
+            "runtimeExecutable": "grunt",
+            "runtimeArgs": [
+                "-d",
+                "${workspaceRoot}\\Gruntfile.js"
+            ],
+            "port": 5858
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch test.js",
+            "program": "${workspaceRoot}/test.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch testmustache",
+            "program": "${workspaceRoot}\\testmustache.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch test YAML",
+            "program": "${workspaceRoot}\\testyaml.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch swagger2ts",
+            "program": "${workspaceRoot}\\bin\\swagger2ts.js",
+            "args": [
+                "-o",
+                "./temp",
+                "D:/Projects/PrimaN/ProIn Projects/Extensions/openapi/swagger.yaml"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch swagger2ts -l",
+            "program": "${workspaceRoot}\\bin\\swagger2ts.js",
+            "args": [
+                "-l"
+            ]
+        }
+    ]
+}

@@ -5,14 +5,12 @@ var CodeGen = require('./lib/codegen.js').CodeGen;
 var swagger2 = require('./lib/swagger2View')
 
 //var list = fs.readdirSync('tests/apis');
-const proinapi = 'D:/Projects/PrimaN/ProIn Projects/Extensions/ProIn.WebApi/api/swagger.yaml'
+const proinapi = 'D:/Projects/PrimaN/ProIn Projects/Extensions/openapi/swagger/swagger.yaml'
 file = proinapi;
 console.log('open api file ' + file)
 let json = YAML.load(proinapi)
 
 var methods = _.filter(json.paths,(api,path)=>{
-    //console.log(api);
-    //console.log(path);
     if(api.get && api.get.tags){
         return api;
     }
