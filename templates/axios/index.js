@@ -139,7 +139,7 @@ const generate = function (opts, mustache, data) {
     _.map(data.definitions,d=>{
         results.push({
             name: d.name,
-            fileName: `model\\${d.name}.js`,
+            fileName: `model\\${d.name}.ts`,
             source: mustache.render(templates.classDef, d, templates)
         });
     });

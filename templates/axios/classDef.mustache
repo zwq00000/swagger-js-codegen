@@ -2,14 +2,14 @@
 * model define {{name}} {{title}}
 **/
 
-export default class {{name}}{
+export default interface {{name}}{
 {{#tsType}}
 {{#properties}}
 /**
 * {{description}}
 * @member {{#isRef}}{{=<% %>=}}{<%&target%>}<%={{ }}=%>{{/isRef}}{{^isRef}}{{=<% %>=}}{<%&tsType%>}<%={{ }}=%>{{/isRef}} {{name}} {{#isArray}}{{#elementType}}{{target}}{{/elementType}}{{/isArray}}
 */
-  {{name}}{{#isArray}}=[]{{/isArray}};
+  {{name}}:{{^isArray}}{{#isRef}}{{target}}{{/isRef}}{{^isRef}}{{tsType}}{{/isRef}}{{/isArray}}{{#isArray}}{{items}}[]{{/isArray}};
 {{/properties}}
 }
 {{/tsType}}
